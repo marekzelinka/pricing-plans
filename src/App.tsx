@@ -1,4 +1,5 @@
 import { Radio, RadioGroup } from "@headlessui/react";
+import { CheckIcon } from "@heroicons/react/20/solid";
 import { useState } from "react";
 import { frequencies } from "./data/frequencies";
 import { plans } from "./data/plans";
@@ -64,9 +65,15 @@ export default function PricingPlans() {
               >
                 Buy plan
               </a>
-              <ul className="mt-8 grid gap-3 text-sm/6 text-gray-600">
+              <ul className="mt-8 grid gap-3">
                 {plan.features.map((feature) => (
-                  <li key={feature}>{feature}</li>
+                  <li
+                    key={feature}
+                    className="flex gap-3 text-sm/6 text-gray-600"
+                  >
+                    <CheckIcon className="size-5 flex-none text-indigo-600" />
+                    {feature}
+                  </li>
                 ))}
               </ul>
             </div>
