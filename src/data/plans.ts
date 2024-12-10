@@ -15,7 +15,7 @@ export interface Plan {
 export const plans = [
   {
     name: "Hobby",
-    id: "tier-hobby",
+    id: "plan-hobby",
     href: "#",
     price: { monthly: "$19", annually: "$199" },
     description: "The essentials to provide your best work for clients.",
@@ -24,7 +24,7 @@ export const plans = [
   },
   {
     name: "Freelancer",
-    id: "tier-freelancer",
+    id: "plan-freelancer",
     href: "#",
     price: { monthly: "$29", annually: "$299" },
     description: "The essentials to provide your best work for clients.",
@@ -38,7 +38,7 @@ export const plans = [
   },
   {
     name: "Startup",
-    id: "tier-startup",
+    id: "plan-startup",
     href: "#",
     price: { monthly: "$59", annually: "$599" },
     description: "A plan that scales with your rapidly growing business.",
@@ -53,7 +53,7 @@ export const plans = [
   },
   {
     name: "Enterprise",
-    id: "tier-enterprise",
+    id: "plan-enterprise",
     href: "#",
     price: { monthly: "$99", annually: "$999" },
     description: "Dedicated support and infrastructure for your company.",

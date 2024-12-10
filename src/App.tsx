@@ -30,13 +30,13 @@ export default function PricingPlans() {
             <RadioGroup
               value={frequency}
               onChange={setFrequency}
-              className="grid grid-cols-2 gap-x-1 rounded-full p-1 text-center text-xs/5 font-semibold ring-1 ring-inset ring-gray-200"
+              className="grid grid-cols-2 gap-1 rounded-full p-1 ring-1 ring-inset ring-gray-200"
             >
               {frequencies.map((option) => (
                 <Radio
                   key={option.value}
                   value={option}
-                  className="cursor-pointer rounded-full px-2.5 py-1 text-gray-500 data-[checked]:bg-indigo-600 data-[checked]:text-white"
+                  className="cursor-pointer rounded-full px-2.5 py-1 text-center text-xs/5 font-semibold text-gray-500 data-[checked]:bg-indigo-600 data-[checked]:text-white"
                 >
                   {option.label}
                 </Radio>
@@ -47,7 +47,10 @@ export default function PricingPlans() {
         <div className="isolate mt-10 grid grid-cols-1 gap-8 max-xl:mx-auto max-lg:max-w-md md:grid-cols-2 md:max-lg:max-w-2xl lg:max-xl:max-w-4xl xl:grid-cols-4">
           {plans.map((plan) => (
             <div key={plan.id} className="rounded-3xl p-8 ring-1 ring-gray-200">
-              <h3 className="text-lg/8 font-semibold text-gray-900">
+              <h3
+                id={plan.id}
+                className="text-lg/8 font-semibold text-gray-900"
+              >
                 {plan.name}
               </h3>
               <p className="mt-4 text-sm/6 text-gray-600">{plan.description}</p>
@@ -59,13 +62,16 @@ export default function PricingPlans() {
                   /month
                 </span>
               </p>
-              <a
-                href={plan.href}
-                className="mt-6 inline-flex w-full items-center justify-center rounded-md px-3 py-2 text-sm/6 font-semibold text-indigo-600 ring-1 ring-inset ring-indigo-200 hover:ring-indigo-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
-                Buy plan
-              </a>
-              <ul className="mt-8 grid gap-3">
+              <div className="mt-6 grid">
+                <a
+                  href={plan.href}
+                  className="inline-flex items-center justify-center rounded-md px-3 py-2 text-sm/6 font-semibold text-indigo-600 ring-1 ring-inset ring-indigo-200 hover:ring-indigo-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  aria-describedby={plan.id}
+                >
+                  Buy plan
+                </a>
+              </div>
+              <ul role="list" className="mt-8 grid gap-3">
                 {plan.features.map((feature) => (
                   <li
                     key={feature}
