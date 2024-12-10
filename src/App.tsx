@@ -1,6 +1,11 @@
-import { plans } from "./data";
+import { Radio, RadioGroup } from "@headlessui/react";
+import { useState } from "react";
+import { frequencies } from "./data/frequencies";
+import { plans } from "./data/plans";
 
 export default function PricingPlans() {
+  const [frequency, setFrequency] = useState(frequencies[0]);
+
   return (
     <div className="bg-white py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -20,40 +25,52 @@ export default function PricingPlans() {
           </p>
         </div>
         <div className="mt-16 flex justify-center">
-          <div className="isolate grid grid-cols-1 gap-8 max-xl:mx-auto max-lg:max-w-md md:grid-cols-2 md:max-lg:max-w-2xl lg:max-xl:max-w-4xl xl:grid-cols-4">
-            {plans.map((plan) => (
-              <div
-                key={plan.id}
-                className="rounded-3xl p-8 ring-1 ring-gray-200"
-              >
-                <h3 className="text-lg/8 font-semibold text-gray-900">
-                  {plan.name}
-                </h3>
-                <p className="mt-4 text-sm/6 text-gray-600">
-                  {plan.description}
-                </p>
-                <p className="mt-6 flex items-baseline gap-1">
-                  <span className="text-4xl font-semibold tracking-tight text-gray-900">
-                    {plan.price.monthly}
-                  </span>
-                  <span className="text-sm/6 font-semibold text-gray-600">
-                    /month
-                  </span>
-                </p>
-                <a
-                  href={plan.href}
-                  className="mt-6 inline-flex w-full items-center justify-center rounded-md px-3 py-2 text-sm/6 font-semibold text-indigo-600 ring-1 ring-inset ring-indigo-200 hover:ring-indigo-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          <fieldset aria-label="Payment frequency">
+            <RadioGroup
+              value={frequency}
+              onChange={setFrequency}
+              className="grid grid-cols-2 gap-x-1 rounded-full p-1 text-center text-xs/5 font-semibold ring-1 ring-inset ring-gray-200"
+            >
+              {frequencies.map((option) => (
+                <Radio
+                  key={option.value}
+                  value={option}
+                  className="cursor-pointer rounded-full px-2.5 py-1 text-gray-500 data-[checked]:bg-indigo-600 data-[checked]:text-white"
                 >
-                  Buy plan
-                </a>
-                <ul className="mt-8 grid gap-3 text-sm/6 text-gray-600">
-                  {plan.features.map((feature) => (
-                    <li key={feature}>{feature}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
+                  {option.label}
+                </Radio>
+              ))}
+            </RadioGroup>
+          </fieldset>
+        </div>
+        <div className="isolate mt-10 grid grid-cols-1 gap-8 max-xl:mx-auto max-lg:max-w-md md:grid-cols-2 md:max-lg:max-w-2xl lg:max-xl:max-w-4xl xl:grid-cols-4">
+          {plans.map((plan) => (
+            <div key={plan.id} className="rounded-3xl p-8 ring-1 ring-gray-200">
+              <h3 className="text-lg/8 font-semibold text-gray-900">
+                {plan.name}
+              </h3>
+              <p className="mt-4 text-sm/6 text-gray-600">{plan.description}</p>
+              <p className="mt-6 flex items-baseline gap-1">
+                <span className="text-4xl font-semibold tracking-tight text-gray-900">
+                  {plan.price[frequency.value]}
+                </span>
+                <span className="text-sm/6 font-semibold text-gray-600">
+                  /month
+                </span>
+              </p>
+              <a
+                href={plan.href}
+                className="mt-6 inline-flex w-full items-center justify-center rounded-md px-3 py-2 text-sm/6 font-semibold text-indigo-600 ring-1 ring-inset ring-indigo-200 hover:ring-indigo-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                Buy plan
+              </a>
+              <ul className="mt-8 grid gap-3 text-sm/6 text-gray-600">
+                {plan.features.map((feature) => (
+                  <li key={feature}>{feature}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
       </div>
     </div>
